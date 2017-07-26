@@ -1,29 +1,30 @@
 <?php
 
-include_once 'animal.php';
+include_once 'models/animals.php';
+include_once 'models/cars.php';
+include_once 'controllers/animals.php';
+include_once 'controllers/cars.php';
 
+$response = null;
 if (array_key_exists('page', $_GET)) {
+//    $pages = ['animals', 'cars', 'fruits'];
 
     if ($_GET['page'] === 'animals') {
-        $color = $_GET['color'] ?? null;
-        $listOfAnimals = getListOfAnimals();
-
-        $content = render(
-            'views/animals.view.php',
-            [
-                'animals' => $listOfAnimals
-            ]
-        );
+        $response = animalsAction();
     }
 
     if ($_GET['page'] === 'cars') {
-        $content = include 'views/cars.view.php';
+        $response = carsAction();
     }
-
-    include 'view.php';
 }
 
-function render(string $template, array $contents)
+if ($response == null) {
+    $response = 'Please select a page';
+}
+
+include 'view.php';
+
+function render(string $template, array $content) : string
 {
     return include $template;
 }

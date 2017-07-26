@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 
-echo $content;
+echo $response;
 
 include 'footer.php';
 ?>

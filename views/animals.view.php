@@ -1,7 +1,7 @@
 <?php
 $output = '<ul>';
-foreach ($contents['animals'] as $animal) {
-    $output .= '<li>' . $animal . '</li>';
+foreach ($content['animals'] as $animal) {
+    $output .= "<li>A {$content['color']} $animal</li>";
 }
 $output .= '</ul>';
 
