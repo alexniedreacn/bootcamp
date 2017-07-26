@@ -1,4 +1,7 @@
 <?php
+
+include_once 'models/cars.php';
+
 function carsAction() {
     $listOfCars = getRandomCar();
 
