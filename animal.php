@@ -1,11 +1,14 @@
 <?php
-$listOfAnimals = [
-    'rabbit',
-    'bear',
-    'rat',
-    'dog',
-    'cat',
-    'mouse'
-];
+function getListOfAnimals()
+{
+    $listOfAnimals = [
+        'rabbit',
+        'bear',
+        'rat',
+        'dog',
+        'cat',
+        'mouse'
+    ];
 
-return $listOfAnimals;
+    return $listOfAnimals;
+}
