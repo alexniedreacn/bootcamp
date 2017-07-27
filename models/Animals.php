@@ -1,23 +1,27 @@
 <?php
 
-class Animals
+include_once 'AnimalModelInterface.php';
+
+class Animals implements AnimalModelInterface
 {
     /**
      * Returns a list of animals
      *
      * @return array
      */
+
     public function getListOfAnimals() : array
     {
-        $listOfAnimals = [
+        return [
             'rabbit',
             'bear',
             'rat',
-            'dog',
+            'mouse',
             'cat',
-            'mouse'
+            'dog',
+            'moose',
+            'elephant',
+            'giraffe'
         ];
-
-        return $listOfAnimals;
     }
 }

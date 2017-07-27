@@ -1,7 +1,9 @@
 <?php
+$color = $content['color'] ?? null;
+
 $output = '<ul>';
 foreach ($content['animals'] as $animal) {
-    $output .= "<li>A {$content['color']} $animal</li>";
+    $output .= "<li>A $color $animal</li>";
 }
 $output .= '</ul>';
 

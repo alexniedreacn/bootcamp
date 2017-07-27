@@ -24,4 +24,9 @@ class Cars
     {
         shuffle($this->arrayOfCars);
     }
+
+    public function getListOfAnimals()
+    {
+        return [];
+    }
 }
