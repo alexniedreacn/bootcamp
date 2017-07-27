@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPBootcamp;
+
 class Container implements ContainerInterface
 {
     protected $container;

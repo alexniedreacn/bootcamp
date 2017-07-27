@@ -1,22 +1,24 @@
 <?php
 
-include_once 'controllers/AnimalsController.php';
-include_once 'controllers/CarsController.php';
-include_once 'Container.php';
+require 'vendor/autoload.php';
 
-class Database
-{
-
-}
+use PHPBootcamp\Controllers\AnimalsController;
+use PHPBootcamp\Controllers\CarsController;
+use PHPBootcamp\Models\Cars;
+use PHPBootcamp\Models\Animals;
+use PHPBootcamp\Models\SmallAnimals;
+use PHPBootcamp\Container;
 
 $response = ''; //render('views/landing.view.php');
+
 if (array_key_exists('page', $_GET)) {
     $requestedPage = $_GET['page'];
 
     $dependencies = [
         'model.animals' => new Animals(),
         'model.animals.small' => new SmallAnimals(),
-        'model.cars' => new Cars()
+        'model.cars' => new Cars(),
+        'resource.views' => __DIR__ . '/app/views/'
     ];
 
     $container = new Container($dependencies);
@@ -38,4 +40,4 @@ if (array_key_exists('page', $_GET)) {
     }
 }
 
-include 'view.php';
+include __DIR__ . '/app/view.php';

@@ -1,8 +1,6 @@
 <?php
 
-include_once 'models/Animals.php';
-include_once 'models/SmallAnimals.php';
-include_once 'AbstractController.php';
+namespace PHPBootcamp\Controllers;
 
 class AnimalsController extends AbstractController
 {
@@ -23,7 +21,7 @@ class AnimalsController extends AbstractController
         $listOfAnimals = $animals->getListOfAnimals();
 
         $templateVariables = ['color' => $color, 'animals' => $listOfAnimals];
-        $template = 'views/animals.view.php';
+        $template = 'animals.view.php';
 
         return $this->render($template, $templateVariables);
     }
@@ -36,7 +34,7 @@ class AnimalsController extends AbstractController
         $listOfAnimals = $animals->getListOfAnimals();
 
         $templateVariables = ['animals' => $listOfAnimals];
-        $template = 'views/animals.view.php';
+        $template = 'animals.view.php';
 
         return $this->render($template, $templateVariables);
     }

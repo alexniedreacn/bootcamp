@@ -1,6 +1,6 @@
 <?php
 
-include_once 'AnimalModelInterface.php';
+namespace PHPBootcamp\Models;
 
 class SmallAnimals implements AnimalModelInterface
 {

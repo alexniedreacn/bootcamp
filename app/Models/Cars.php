@@ -1,5 +1,7 @@
 <?php
 
+namespace PHPBootcamp\Models;
+
 class Cars
 {
     public function __construct()
