@@ -2,11 +2,24 @@
 
 class Cars
 {
-    private $arrayOfCars = [];
-
-    public function __construct(array $arrayOfCars)
+    public function __construct()
     {
-        $this->arrayOfCars = $arrayOfCars;
+        $this->arrayOfCars = [
+            'Toyota',
+            'Nissan',
+            'Tesla',
+            'Opel',
+            'Bla-mobile',
+            'Running Turtle',
+            'Smelly Sh*t',
+            'Smokey',
+            'GAZ',
+            'VAZ',
+            'MAZ',
+            'LAZ',
+            'Katyusha BM-30 Smerch',
+            'Katyusha BM-21 Grad'
+        ];
     }
 
     /**
@@ -23,10 +36,5 @@ class Cars
     private function shuffle()
     {
         shuffle($this->arrayOfCars);
-    }
-
-    public function getListOfAnimals()
-    {
-        return [];
     }
 }

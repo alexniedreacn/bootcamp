@@ -2,24 +2,31 @@
 
 include_once 'controllers/AnimalsController.php';
 include_once 'controllers/CarsController.php';
+include_once 'Container.php';
+
+class Database
+{
+
+}
 
 $response = ''; //render('views/landing.view.php');
 if (array_key_exists('page', $_GET)) {
     $requestedPage = $_GET['page'];
 
-    $animals = new Animals();
-    $smallAnimals = new SmallAnimals();
+    $dependencies = [
+        'model.animals' => new Animals(),
+        'model.animals.small' => new SmallAnimals(),
+        'model.cars' => new Cars()
+    ];
 
-    $carsModel = new Cars([]);
+    $container = new Container($dependencies);
 
-    $animals = new AnimalsController($animals);
-    $smallAnimals = new AnimalsController($smallAnimals);
-
-    $cars = new CarsController();
+    $animals = new AnimalsController($container);
+    $cars = new CarsController($container);
 
     $pages = [
         'animals' => [$animals, 'animalsAction'],
-        'small-animals' => [$smallAnimals, 'smallAnimalsAction'],
+        'small-animals' => [$animals, 'smallAnimalsAction'],
         'cars' => [$cars, 'carsAction'],
     ];
 

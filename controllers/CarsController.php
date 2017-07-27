@@ -7,24 +7,8 @@ class CarsController extends AbstractController
 {
     public function carsAction()
     {
-        $arrayOfCars = [
-            'Toyota',
-            'Nissan',
-            'Tesla',
-            'Opel',
-            'Bla-mobile',
-            'Running Turtle',
-            'Smelly Sh*t',
-            'Smokey',
-            'GAZ',
-            'VAZ',
-            'MAZ',
-            'LAZ',
-            'Katyusha BM-30 Smerch',
-            'Katyusha BM-21 Grad'
-        ];
-
-        $cars = new Cars($arrayOfCars);
+        /** @var \Cars $cars */
+        $cars = $this->container->get('model.cars');
         $listOfCars = $cars->getRandomCars();
 
         $templateVariables = ['cars' => $listOfCars];

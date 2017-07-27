@@ -13,16 +13,14 @@ class AnimalsController extends AbstractController
     protected $smallAnimals;
     protected $animals;
 
-    public function __construct(AnimalModelInterface $animalModel)
-    {
-        $this->animals = $animalModel;
-    }
-
     public function animalsAction()
     {
         $color = $_GET['color'] ?? null;
 
-        $listOfAnimals = $this->animals->getListOfAnimals();
+        /** @var \Animals $animals */
+        $animals = $this->container->get('model.animals');
+
+        $listOfAnimals = $animals->getListOfAnimals();
 
         $templateVariables = ['color' => $color, 'animals' => $listOfAnimals];
         $template = 'views/animals.view.php';
@@ -32,7 +30,10 @@ class AnimalsController extends AbstractController
 
     public function smallAnimalsAction()
     {
-        $listOfAnimals = $this->animals->getListOfAnimals();
+        /** @var \SmallAnimals $animals */
+        $animals = $this->container->get('model.animals.small');
+
+        $listOfAnimals = $animals->getListOfAnimals();
 
         $templateVariables = ['animals' => $listOfAnimals];
         $template = 'views/animals.view.php';
