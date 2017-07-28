@@ -11,10 +11,8 @@ class AnimalsController extends AbstractController
     protected $smallAnimals;
     protected $animals;
 
-    public function animalsAction()
+    public function animalsAction($color = null)
     {
-        $color = $_GET['color'] ?? null;
-
         /** @var \Animals $animals */
         $animals = $this->container->get('model.animals');
 
