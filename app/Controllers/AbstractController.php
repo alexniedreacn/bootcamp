@@ -16,6 +16,6 @@ abstract class AbstractController implements ControllerInterface
 
     public function render(string $template, array $content = []) : string
     {
-        return include $this->container->get('resource.views') . $template;
+        return include $this->container->getParameter('resource.views') . $template;
     }
 }

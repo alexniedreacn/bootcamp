@@ -12,7 +12,8 @@
         }
     ],
     "require": {
-        "symfony/routing": "^3.3"
+        "symfony/routing": "^3.3",
+        "symfony/dependency-injection": "^3.3"
     },
     "autoload": {
         "psr-4": { "PHPBootcamp\\": "app/" }

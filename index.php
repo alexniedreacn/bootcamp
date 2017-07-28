@@ -2,26 +2,26 @@
 
 require 'vendor/autoload.php';
 
+use PHPBootcamp\Container;
 use PHPBootcamp\Controllers\AnimalsController;
 use PHPBootcamp\Controllers\CarsController;
-use PHPBootcamp\Models\Cars;
-use PHPBootcamp\Models\Animals;
-use PHPBootcamp\Models\SmallAnimals;
-use PHPBootcamp\Container;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 $response = ''; //render('views/landing.view.php');
 
 if (array_key_exists('page', $_GET)) {
     $requestedPage = $_GET['page'];
 
-    $dependencies = [
-        'model.animals' => new Animals(),
-        'model.animals.small' => new SmallAnimals(),
-        'model.cars' => new Cars(),
-        'resource.views' => __DIR__ . '/app/views/'
-    ];
+    $containerBuilder = new ContainerBuilder();
+    $containerBuilder->setParameter('resource.views', __DIR__ . '/app/views/');
+    $containerBuilder->register('repository.animals', '\PHPBootcamp\Repositories\AnimalsRepository');
+    $containerBuilder->register('model.animals.small', '\PHPBootcamp\Models\SmallAnimals');
+    $containerBuilder->register('model.cars', '\PHPBootcamp\Models\Cars');
+    $containerBuilder->register('model.animals', '\PHPBootcamp\Models\Animals')
+        ->addArgument(new Reference('repository.animals'));
 
-    $container = new Container($dependencies);
+    $container = new Container($containerBuilder);
 
     $animals = new AnimalsController($container);
     $cars = new CarsController($container);
