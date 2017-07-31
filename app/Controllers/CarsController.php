@@ -2,11 +2,13 @@
 
 namespace PHPBootcamp\Controllers;
 
+use PHPBootcamp\Models\Cars;
+
 class CarsController extends AbstractController
 {
     public function carsAction()
     {
-        /** @var \Cars $cars */
+        /** @var Cars $cars */
         $cars = $this->container->get('model.cars');
         $listOfCars = $cars->getRandomCars();
 

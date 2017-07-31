@@ -2,6 +2,9 @@
 
 namespace PHPBootcamp\Controllers;
 
+use PHPBootcamp\Models\Animals;
+use PHPBootcamp\Models\SmallAnimals;
+
 class AnimalsController extends AbstractController
 {
     const ANIMAL_SIZE_BIG = 1;
@@ -13,7 +16,7 @@ class AnimalsController extends AbstractController
 
     public function animalsAction($color = null)
     {
-        /** @var \Animals $animals */
+        /** @var Animals $animals */
         $animals = $this->container->get('model.animals');
 
         $listOfAnimals = $animals->getListOfAnimals();
@@ -26,7 +29,7 @@ class AnimalsController extends AbstractController
 
     public function smallAnimalsAction()
     {
-        /** @var \SmallAnimals $animals */
+        /** @var SmallAnimals $animals */
         $animals = $this->container->get('model.animals.small');
 
         $listOfAnimals = $animals->getListOfAnimals();

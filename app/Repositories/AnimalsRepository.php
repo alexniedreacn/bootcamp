@@ -2,37 +2,23 @@
 
 namespace PHPBootcamp\Repositories;
 
-class AnimalsRepository
-{
-    public function connectToDb()
-    {
-        //
-    }
+use PHPBootcamp\Controllers\AnimalsController;
 
-    public function getListOfAnimals()
+class AnimalsRepository extends Repository
+{
+    public function getListOfAnimals($size = AnimalsController::ANIMAL_SIZE_MEDIUM)
     {
-        //Query database
-        //Fetch list
-        return [
-            'small' => [
-                'rabbit',
-                'rat',
-                'cat',
-                'mouse'
-            ],
-            'medium' => [
-                'dog',
-                'goat',
-                'sheep',
-                'llama'
-            ],
-            'large' => [
-                'moose',
-                'elephant',
-                'giraffe',
-                'rhino',
-                'your mom'
-            ]
+        $sizeMap = [
+            AnimalsController::ANIMAL_SIZE_SMALL  => 'small',
+            AnimalsController::ANIMAL_SIZE_MEDIUM => 'medium',
+            AnimalsController::ANIMAL_SIZE_BIG    => 'big',
         ];
+        $animalSize = $sizeMap[$size];
+
+        $animals = $this->db->select('animals', '*');
+
+        return array_filter($animals, function ($animal) use ($animalSize) {
+            return $animal['size'] === $animalSize;
+        });
     }
 }

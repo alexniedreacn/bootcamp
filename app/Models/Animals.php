@@ -20,7 +20,6 @@ class Animals implements AnimalModelInterface
      */
     public function getListOfAnimals() : array
     {
-        $listOfAnimals = $this->animalsRepository->getListOfAnimals();
-        return $listOfAnimals['medium'];
+        return $this->animalsRepository->getListOfAnimals();
     }
 }

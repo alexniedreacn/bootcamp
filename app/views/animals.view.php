@@ -1,10 +1,9 @@
-<?php
-$color = $content['color'] ?? null;
+{% include 'header.php' %}
 
-$output = '<ul>';
-foreach ($content['animals'] as $animal) {
-    $output .= "<li>A $color $animal</li>";
-}
-$output .= '</ul>';
+<ul>
+{% for animal in animals %}
+    <li>A {{ color }} {{ animal.name }}</li>
+{% endfor %}
+</ul>
 
-return $output;
+{% include 'footer.php' %}

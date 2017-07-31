@@ -20,11 +20,31 @@ class Application
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->setParameter('resource.views', __DIR__ . '/views/');
-        $containerBuilder->register('repository.animals', '\PHPBootcamp\Repositories\AnimalsRepository');
-        $containerBuilder->register('model.animals.small', '\PHPBootcamp\Models\SmallAnimals');
+
+        $containerBuilder->register('database', '\Medoo\Medoo')
+            ->addArgument(
+                [
+                    'database_type' => 'mysql',
+                    'database_name' => 'bootcamp',
+                    'server' => 'localhost',
+                    'username' => 'root',
+                    'password' => ''
+                ]
+            );
+        $containerBuilder->register('repository.animals', '\PHPBootcamp\Repositories\AnimalsRepository')
+            ->addArgument(new Reference('database'));
+
+        $containerBuilder->register('model.animals.small', '\PHPBootcamp\Models\SmallAnimals')
+            ->addArgument(new Reference('repository.animals'));
         $containerBuilder->register('model.cars', '\PHPBootcamp\Models\Cars');
         $containerBuilder->register('model.animals', '\PHPBootcamp\Models\Animals')
             ->addArgument(new Reference('repository.animals'));
+
+        $containerBuilder->register('twig.loader', '\Twig_Loader_Filesystem')
+            ->addArgument('%resource.views%');
+        $containerBuilder->register('twig.env', '\Twig_Environment')
+            ->addArgument(new Reference('twig.loader'))
+            ->addArgument(['cache' => false]);
 
         return new Container($containerBuilder);
     }
@@ -65,7 +85,7 @@ class Application
             $r->addRoute('GET', '/animals[/{color}]', [$animals, 'animalsAction']);
             $r->addRoute('GET', '/small-animals[/{color}]', [$animals, 'smallAnimalsAction']);
             $r->addRoute('GET', '/cars', [$cars, 'carsAction']);
-            $r->addRoute('GET', '/', 'whatever');
+//            $r->addRoute('GET', '/', 'whatever');
         });
 
         return $dispatcher;
